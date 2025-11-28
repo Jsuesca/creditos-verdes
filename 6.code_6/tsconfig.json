@@ -34,6 +34,7 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,

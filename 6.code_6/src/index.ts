@@ -1,4 +1,4 @@
-import app from "./app";
+import app from "./infraestructure/web/app";
 import { ServerBootstrap } from "./infraestructure/bootstrap/server.bootstrap";
 import { connectDB } from "./infraestructure/config/data-base";
 

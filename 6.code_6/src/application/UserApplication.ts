@@ -1,10 +1,10 @@
 import { User } from "../domain/User";
-import { UsePort } from "../domain/UserPort";
+import { UserPort } from "../domain/UserPort";
 
 export class UserApplication {
-    private port: UsePort;
+    private port: UserPort;
 
-    constructor(port: UsePort) {
+    constructor(port: UserPort) {
         this.port = port;
     }
 

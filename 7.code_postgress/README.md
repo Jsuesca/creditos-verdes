@@ -48,3 +48,33 @@ Instalación
 - "emitDecoratorMetadata": true,
 
 
+### **Explicación de cada sección**
+
+1. **Cofigurar mysql**
+   - npm install typeorm mysql2
+2. vamos a environment-vars.ts y reconfiguramos el archivo con las nuevas variables
+   de entorno
+3. Descomentamos en el tsconfig.ts las siguientes opciones:
+   - "experimentalDecorators": true,
+   - "emitDecoratorMetadata": true,
+
+
+   1. Desinstalar mysql
+   - npm uninstall mysql mysql2
+
+2. Instalar postgress
+   - npm install pg
+
+3. Actualizar las variables de entorno
+   - Actualizaamos .env
+
+PORT=4000
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=admin
+DB_NAME=patterns_class
+
+4. En el data-base.ts actualizamos en el AppDataSource
+5. Actualizamos en el entities
+

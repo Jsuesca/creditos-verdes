@@ -37,25 +37,24 @@ export class UserActivityAdapter implements UserActivityPort {
     }));
   }
 
-  // Actualizar estado
-  async updateStatus(
-    id: number,
-    status: UserActivity["status"],
-    points?: number
-  ): Promise<boolean> {
-    const updateData: Partial<UserActivityEntity> = {
-      status,
-    };
+// Actualizar estado
+async updateStatus(
+  id: number,
+  status: UserActivity["status"],
+  points?: number
+): Promise<boolean> {
+  const updateData: Partial<UserActivityEntity> = {
+    status,
+    // ✅ NUNCA undefined
+    points: points ?? null,
+  };
 
-    if (points !== undefined) {
-      updateData.points = points;
-    }
-
-    if (status === "completed" || status === "approved") {
-      updateData.completedAt = new Date();
-    }
-
-    const result = await this.repo.update(id, updateData);
-    return result.affected !== 0;
+  if (status === "completed" || status === "approved") {
+    updateData.completedAt = new Date();
   }
+
+  const result = await this.repo.update(id, updateData);
+  return result.affected !== 0;
+}
+
 }

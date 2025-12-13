@@ -20,11 +20,11 @@ export default function Register({ onBackToLogin }: Props) {
         name,
         email,
         password,
-        status: "active", // 🔥 requerido por el backend
+        status: "active", // requerido por el backend
       });
 
       alert("Usuario registrado correctamente");
-      onBackToLogin(); // vuelve al login
+      onBackToLogin();
     } catch (err: any) {
       console.error(err);
       setError(
@@ -36,45 +36,51 @@ export default function Register({ onBackToLogin }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registro</h2>
+    <div className="container">
+      <form className="card" onSubmit={handleSubmit}>
+        <h2>Registro</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error">{error}</p>}
 
-      <input
-        placeholder="Nombre"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+        <input
+          placeholder="Nombre"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
 
-      <input
-        type="email"
-        placeholder="Correo"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+        <input
+          type="email"
+          placeholder="Correo"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-      <small>
-        La contraseña debe contener letras y números
-      </small>
+        <small style={{ display: "block", marginBottom: "1rem", color: "#555" }}>
+          La contraseña debe contener letras y números
+        </small>
 
-      <br /><br />
+        <button className="btn-primary" type="submit">
+          Registrar
+        </button>
 
-      <button type="submit">Registrar</button>
-
-      <button type="button" onClick={onBackToLogin}>
-        Volver al login
-      </button>
-    </form>
+        <button
+          className="btn-secondary"
+          type="button"
+          onClick={onBackToLogin}
+        >
+          Volver al login
+        </button>
+      </form>
+    </div>
   );
 }

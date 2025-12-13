@@ -1,0 +1,238 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f8;
+}
+
+/* Contenedor centrado */
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.card {
+  background: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+.card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+/* Inputs */
+.card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.card input:focus {
+  outline: none;
+  border-color: #2ecc71;
+}
+
+/* Botones */
+.card button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Botón principal */
+.btn-primary {
+  background: #2ecc71;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #27ae60;
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background: transparent;
+  color: #2ecc71;
+  border: 1px solid #2ecc71;
+}
+
+.btn-secondary:hover {
+  background: #eafaf1;
+}
+
+/* Error */
+.error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   FORMULARIOS (Login / Register)
+========================= */
+form {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #2e7d32;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #1b5e20;
+}
+
+form button[type="button"] {
+  background-color: #607d8b;
+}
+
+form button[type="button"]:hover {
+  background-color: #455a64;
+}
+
+/* =========================
+   ACTIVIDADES / CATÁLOGO
+========================= */
+.card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #2e7d32;
+}
+
+.card button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #0d47a1;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+.dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #ffffff;
+}
+
+.dashboard th,
+.dashboard td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.dashboard th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.dashboard tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* =========================
+   ESTADOS DE ACTIVIDAD
+========================= */
+.status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status.assigned {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status.in_progress {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.approved {
+  background-color: #c3e6cb;
+  color: #155724;
+}

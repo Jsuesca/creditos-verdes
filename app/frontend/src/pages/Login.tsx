@@ -22,39 +22,51 @@ export default function Login({ onLoginSuccess, onGoToRegister }: Props) {
       });
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userId", res.data.user.id);
+
       onLoginSuccess();
     } catch (err) {
+      console.error(err);
       setError("Credenciales inválidas");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+    <div className="container">
+      <form className="card" onSubmit={handleSubmit}>
+        <h2>Iniciar sesión</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error">{error}</p>}
 
-      <input
-        type="email"
-        placeholder="Correo"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+        <input
+          type="email"
+          placeholder="Correo"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-      <button type="submit">Ingresar</button>
+        <button className="btn-primary" type="submit">
+          Ingresar
+        </button>
 
-      <button type="button" onClick={onGoToRegister}>
-        Registrarse
-      </button>
-    </form>
+        <button
+          className="btn-secondary"
+          type="button"
+          onClick={onGoToRegister}
+        >
+          Registrarse
+        </button>
+      </form>
+    </div>
   );
+
 }

@@ -26,25 +26,44 @@ export default function Catalog() {
       });
   }, []);
 
-  if (loading) return <p>Cargando catálogo...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (loading) {
+    return (
+      <div className="container">
+        <p>Cargando catálogo...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container">
+        <p style={{ color: "red" }}>{error}</p>
+      </div>
+    );
+  }
 
   return (
-    <div>
+    <div className="container">
       <h2>📋 Catálogo de Actividades</h2>
 
       {catalog.length === 0 ? (
         <p>No hay actividades disponibles</p>
       ) : (
-        <ul>
+        <div style={{ display: "grid", gap: "1rem" }}>
           {catalog.map(item => (
-            <li key={item.id} style={{ marginBottom: "1rem" }}>
-              <strong>{item.nombre}</strong>
-              <p>{item.descripcion}</p>
-              <small>Código: {item.clave}</small>
-            </li>
+            <div key={item.id} className="card">
+              <h3>{item.nombre}</h3>
+
+              <p style={{ color: "#555" }}>
+                {item.descripcion}
+              </p>
+
+              <small style={{ color: "#888" }}>
+                Código: <strong>{item.clave}</strong>
+              </small>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

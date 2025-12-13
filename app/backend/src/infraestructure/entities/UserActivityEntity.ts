@@ -10,10 +10,10 @@ export class UserActivityEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ type: "integer" })
   userId!: number;
 
-  @Column()
+  @Column({ type: "integer" })
   activityId!: number;
 
   @Column({
@@ -26,7 +26,7 @@ export class UserActivityEntity {
   @Column({ type: "integer", nullable: true })
   points!: number | null;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "timestamp" })
   assignedAt!: Date;
 
   @Column({ type: "timestamp", nullable: true })

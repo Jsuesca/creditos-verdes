@@ -1,15 +1,16 @@
 import { AppDataSource } from "../config/data-base";
 import { UserActivityPort } from "../../domain/UserActivityPort";
-import { UserActivity, UserActivityStatus } from "../../domain/UserActivity";
+import { UserActivity } from "../../domain/UserActivity";
 import { UserActivityEntity } from "../entities/UserActivityEntity";
 
 export class UserActivityAdapter implements UserActivityPort {
   private repo = AppDataSource.getRepository(UserActivityEntity);
 
+  // Asignar actividad a usuario
   async assignActivity(userId: number, activityId: number): Promise<number> {
     const entity = this.repo.create({
-      user_id: userId,
-      activity_id: activityId,
+      userId,
+      activityId,
       status: "assigned",
       points: null,
     });
@@ -18,38 +19,43 @@ export class UserActivityAdapter implements UserActivityPort {
     return saved.id;
   }
 
+  // Listar actividades por usuario
   async listByUser(userId: number): Promise<UserActivity[]> {
-    const entities = await this.repo.find({
-      where: { user_id: userId },
-      order: { assignedAt: "DESC" }, // ✅ camelCase
+    const list = await this.repo.find({
+      where: { userId },
+      order: { assignedAt: "DESC" },
     });
 
-    return entities.map((e) => ({
+    return list.map((e) => ({
       id: e.id,
-      userId: e.user_id,
-      activityId: e.activity_id,
-      status: e.status as UserActivityStatus,
+      userId: e.userId,
+      activityId: e.activityId,
+      status: e.status,
       points: e.points,
       assignedAt: e.assignedAt,
       completedAt: e.completedAt,
     }));
   }
 
+  // Actualizar estado
   async updateStatus(
     id: number,
-    status: UserActivityStatus,
+    status: UserActivity["status"],
     points?: number
   ): Promise<boolean> {
     const updateData: Partial<UserActivityEntity> = {
       status,
     };
 
-    // ✅ SOLO agregamos points si existe
     if (points !== undefined) {
       updateData.points = points;
     }
 
+    if (status === "completed" || status === "approved") {
+      updateData.completedAt = new Date();
+    }
+
     const result = await this.repo.update(id, updateData);
-    return result.affected === 1;
+    return result.affected !== 0;
   }
 }

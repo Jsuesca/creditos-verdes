@@ -19,23 +19,24 @@ export class UserActivityAdapter implements UserActivityPort {
     return saved.id;
   }
 
-  // Listar actividades por usuario
-  async listByUser(userId: number): Promise<UserActivity[]> {
-    const list = await this.repo.find({
-      where: { userId },
-      order: { assignedAt: "DESC" },
-    });
+ // Listar actividades por usuario
+async listByUser(userId: number): Promise<UserActivity[]> {
+  const list = await this.repo.find({
+    where: { userId },
+    order: { assignedAt: "DESC" },
+  });
 
-    return list.map((e) => ({
-      id: e.id,
-      userId: e.userId,
-      activityId: e.activityId,
-      status: e.status,
-      points: e.points,
-      assignedAt: e.assignedAt,
-      completedAt: e.completedAt,
-    }));
-  }
+  return list.map((e) => ({
+    id: e.id,
+    userId: e.userId,
+    activityId: e.activityId,
+    status: e.status,
+    points: e.points,
+    assignedAt: e.assignedAt,
+    completedAt: e.completedAt,
+  }));
+}
+
 
 // Actualizar estado
 async updateStatus(

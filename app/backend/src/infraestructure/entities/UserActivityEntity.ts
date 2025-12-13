@@ -11,15 +11,19 @@ export class UserActivityEntity {
   id!: number;
 
   @Column()
-  user_id!: number;
+  userId!: number;
 
   @Column()
-  activity_id!: number;
+  activityId!: number;
 
-  @Column({ type: "varchar", length: 20 })
-  status!: string;
+  @Column({
+    type: "varchar",
+    length: 20,
+    default: "assigned",
+  })
+  status!: "assigned" | "in_progress" | "completed" | "approved";
 
-  @Column({ type: "int", nullable: true })
+  @Column({ type: "integer", nullable: true })
   points!: number | null;
 
   @CreateDateColumn()

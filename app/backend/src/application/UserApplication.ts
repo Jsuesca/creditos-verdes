@@ -1,0 +1,83 @@
+import bcrypt from "bcryptjs";
+import { User } from "../domain/User";
+import { UserPort } from "../domain/UserPort";
+import { AuthApplication } from "./AuthApplication";
+
+export class UserApplication {
+    private port: UserPort;
+
+    constructor(port: UserPort) {
+        this.port = port;
+    }
+
+    async login(email: string, password: string): Promise<string> {
+        const existUser = await this.port.getUserByEmail(email);
+        if (!existUser) {
+            throw new Error("Credenciales Inválidas");
+        }
+
+        const passMatch = await bcrypt.compare(password, existUser.password);
+        if (!passMatch) {
+            throw new Error("Credenciales Inválidas");
+        }
+
+        const token = AuthApplication.generateToken({
+            id: existUser.id,
+            email: existUser.email,
+            status: existUser.status,
+        });
+
+        return token;
+    }
+
+    async createUser(user: Omit<User, "id">): Promise<number> {
+
+        // Validar si el email ya existe
+        const existUser = await this.port.getUserByEmail(user.email);
+        if (existUser) {
+            throw new Error("Este email ya está registrado");
+        }
+
+        // Hash de contraseña
+        const hashedPassword = await bcrypt.hash(user.password, 12);
+
+        // Crear usuario sin mutar el objeto original
+        return this.port.createUser({
+            ...user,
+            password: hashedPassword
+        });
+    }
+
+    async getUserById(id: number): Promise<User | null> {
+        return this.port.getUserById(id);
+    }
+
+    async getUserByEmail(email: string): Promise<User | null> {
+        return this.port.getUserByEmail(email);
+    }
+
+    async getAllUsers(): Promise<User[]> {
+        return this.port.getAllUsers();
+    }
+
+    async updateUser(id: number, user: Partial<User>): Promise<boolean> {
+        const existingUser = await this.port.getUserById(id);
+
+        if (!existingUser) {
+            throw new Error("Usuario no encontrado");
+        }
+
+        if (user.email) {
+            const emailTaken = await this.port.getUserByEmail(user.email);
+            if (emailTaken && emailTaken.id !== id) {
+                throw new Error("El email ya está en uso");
+            }
+        }
+
+        return this.port.updateUser(id, user);
+    }
+
+    async deleteUser(id: number): Promise<boolean> {
+        return this.port.deleteUser(id);
+    }
+}
